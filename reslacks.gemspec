@@ -35,8 +35,10 @@ Gem::Specification.new do |spec|
 
   # Development Dependencies
   spec.add_development_dependency "bundler"
+  spec.add_development_dependency "dotenv", "~> 2.7.2"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "rubocop", "~> 0.7.0"
 
   # Actual Dependencies
   spec.add_dependency "slack-notifier"
