@@ -7,10 +7,9 @@ Gem::Specification.new do |spec|
   spec.name          = "reslacks"
   spec.version       = Reslacks::VERSION
   spec.authors       = ["Cian Gallagher"]
-  spec.email         = ["cg1830@gmail.com"]
+  spec.email         = ["cian@ciangallagher.net"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.summary       = "Setup and automate slack notifications for  any action in your app."
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
 
@@ -20,7 +19,7 @@ Gem::Specification.new do |spec|
     spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
     spec.metadata["homepage_uri"] = spec.homepage
-    spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
+    spec.metadata["source_code_uri"] = "https://github.com/Cian911/reslacks"
     spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
   else
     raise "RubyGems 2.0 or newer is required to protect against " \
@@ -36,7 +35,11 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  # Development Dependencies
   spec.add_development_dependency "bundler", "~> 1.17"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+
+  # Actual Dependencies
+  spec.add_dependency "slack-notifier"
 end

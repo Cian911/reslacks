@@ -1,0 +1,16 @@
+version: '3.6'
+
+services:
+  app:
+    tty: true
+    stdin_open: true
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent
+    volumes:
+      - ${SSH_AUTH_SOCK}:/ssh-agent
+      - .:/usr/src/app
+      - bundle-data:/usr/src/bundle
+
+volumes:
+  bundle-data:
+    driver: local
