@@ -32,11 +32,12 @@ RSpec.describe Reslacks do
   end
 
   describe '.deliver' do
-    let(:options) do
+    let(:template) do
       {
-        text: "This is a test",
-        channel: "#programming",
-        color: "danger"
+        color: %w[danger good warning info].sample,
+        text: "#{Faker::Hipster.paragraph}",
+        username: "#{Faker::Company.name}",
+        footer: "#{Faker::Company.catch_phrase} | #{Time.now.strftime('%A, %d %b %Y %H:%M:%S')}"
       }
     end
 
@@ -47,7 +48,7 @@ RSpec.describe Reslacks do
     end
 
     it 'should deliver the message' do
-      Reslacks.deliver(options)
+      Reslacks.deliver(template)
     end
   end
 end

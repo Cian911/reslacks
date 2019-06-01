@@ -13,7 +13,7 @@ module Reslacks
             color: color,
             fields: [{
               short: false,
-              value: "<>"
+              value: "<#{sub_field}>"
             }],
             footer: footer,
             mrkdwn_in: ['text'],
@@ -42,6 +42,7 @@ module Reslacks
         {
           attachments: attachments,
           channel: channel,
+          icon_emoji: emoji,
           mrkdwn: mrkdwn,
           username: username
         }
@@ -51,12 +52,22 @@ module Reslacks
         template[:mrkdwn] ? template[:mrkdwn] : true
       end
 
+      def sub_field
+        template[:sub_field] ? template[:sub_field] : app_info
+      end
+
       def text
         template[:text] ? template[:text] : ""
       end
 
       def username
-        template[:username] ? template[:username] : "Reslacks - #{Reslacks::VERSION}"
+        template[:username] ? template[:username] : app_info
+      end
+
+      private
+
+      def app_info
+        "[Reslacks](https://github.com/Cian911/reslacks) - #{Reslacks::VERSION}"
       end
     end
   end
