@@ -1,4 +1,5 @@
 require "bundler/setup"
+require "byebug"
 require "reslacks"
 
 RSpec.configure do |config|
