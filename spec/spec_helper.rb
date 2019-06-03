@@ -1,8 +1,11 @@
 require "bundler/setup"
 require "byebug"
+require 'dotenv'
 require "factory_bot"
 require "faker"
 require "reslacks"
+
+Dotenv.load
 
 RSpec.configure do |config|
   # TODO: Either fix oOR remove FactoryBot...

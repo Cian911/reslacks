@@ -43,7 +43,7 @@ RSpec.describe Reslacks do
 
     before do
       Reslacks.configure do |config|
-        config.slack_web_hook = ''
+        config.slack_web_hook = ENV['SLACK_WEB_HOOK']
       end
     end
 
