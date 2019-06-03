@@ -4,7 +4,16 @@ module Reslacks
       attr_reader :template
 
       def initialize(template = {})
-        @template = template
+        @template = {}
+        attributes = [:channel ,:color, :icon_emoji, :footer, :mrkdwn, :sub_field, :text, :username]
+
+        attributes.each do |attribute|
+          @template[attribute] = self.send attribute
+        end
+
+        @template.merge!(template).each do |key, value|
+          send("#{key}=", value) if respond_to?("#{key}=")
+        end
       end
 
       def attachments
@@ -23,45 +32,39 @@ module Reslacks
       end
 
       def channel
-        template[:channel] ? template[:channel] : ''
+        ""
       end
 
       def color
-        template[:color] ? template[:color] : 'info'
+        "info"
       end
 
-      def emoji
-        template[:icon_emoji] ? template[:icon_emoji] : ':100:'
+      def icon_emoji
+        ":100:"
       end
 
       def footer
-        template[:footer] ? template[:footer] : Time.now.strftime('%A, %d %b %Y %H:%M:%S').to_s
+        "#{Time.now.strftime('%A, %d %b %Y %H:%M:%S')}"
       end
 
       def message
-        {
-          attachments: attachments,
-          channel: channel,
-          icon_emoji: emoji,
-          mrkdwn: mrkdwn,
-          username: username
-        }
+        @template.merge!({ attachments: attachments })
       end
 
       def mrkdwn
-        template[:mrkdwn] ? template[:mrkdwn] : true
+        true
       end
 
       def sub_field
-        template[:sub_field] ? template[:sub_field] : app_info
+        app_info
       end
 
       def text
-        template[:text] ? template[:text] : ''
+        ""
       end
 
       def username
-        template[:username] ? template[:username] : app_info
+        app_info
       end
 
       private
