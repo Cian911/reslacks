@@ -1,10 +1,10 @@
 require 'slack-notifier'
 
-require "reslacks/version"
-require "reslacks/config"
-require "reslacks/errors"
-require "reslacks/clients/slack_client"
-require "reslacks/templates/base_template"
+require 'reslacks/version'
+require 'reslacks/config'
+require 'reslacks/errors'
+require 'reslacks/clients/slack_client'
+require 'reslacks/templates/base_template'
 
 module Reslacks
   class << self

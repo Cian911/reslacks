@@ -23,19 +23,19 @@ module Reslacks
       end
 
       def channel
-        template[:channel] ? template[:channel] : ""
+        template[:channel] ? template[:channel] : ''
       end
 
       def color
-        template[:color] ? template[:color] : "info"
+        template[:color] ? template[:color] : 'info'
       end
 
       def emoji
-        template[:icon_emoji] ? template[:icon_emoji] : ":100:"
+        template[:icon_emoji] ? template[:icon_emoji] : ':100:'
       end
 
       def footer
-        template[:footer] ? template[:footer] : "#{Time.now.strftime('%A, %d %b %Y %H:%M:%S')}"
+        template[:footer] ? template[:footer] : Time.now.strftime('%A, %d %b %Y %H:%M:%S').to_s
       end
 
       def message
@@ -57,7 +57,7 @@ module Reslacks
       end
 
       def text
-        template[:text] ? template[:text] : ""
+        template[:text] ? template[:text] : ''
       end
 
       def username

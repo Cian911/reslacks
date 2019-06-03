@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Reslacks do
   describe 'VERSION' do
-    it "has a version number" do
+    it 'has a version number' do
       expect(Reslacks::VERSION).not_to be nil
     end
   end
@@ -35,8 +35,8 @@ RSpec.describe Reslacks do
     let(:template) do
       {
         color: %w[danger good warning info].sample,
-        text: "#{Faker::Hipster.paragraph}",
-        username: "#{Faker::Company.name}",
+        text: Faker::Hipster.paragraph.to_s,
+        username: Faker::Company.name.to_s,
         footer: "#{Faker::Company.catch_phrase} | #{Time.now.strftime('%A, %d %b %Y %H:%M:%S')}"
       }
     end
