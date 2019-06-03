@@ -41,7 +41,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "factory_bot", "~> 5.0.2"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "rubocop", "~> 0.7.0"
+  spec.add_development_dependency "rubocop", "~> 0.49.0"
 
   # Actual Dependencies
   spec.add_dependency "slack-notifier"
