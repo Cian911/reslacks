@@ -3,16 +3,21 @@ require 'slack-notifier'
 require 'reslacks/version'
 require 'reslacks/config'
 require 'reslacks/errors'
+require 'reslacks/utils/reslacks_utils'
 require 'reslacks/clients/slack_client'
 require 'reslacks/templates/base_template'
+require 'reslacks/templates/danger_template'
+require 'reslacks/templates/success_template'
+require 'reslacks/templates/warning_template'
+require 'reslacks/templates/info_template'
 
 module Reslacks
   class << self
     attr_accessor :config
   end
 
-  def self.deliver(options = {})
-    Reslacks::Clients::SlackClient.new(config.slack_web_hook, options).deliver
+  def self.deliver(options = {}, template = nil)
+    Reslacks::Clients::SlackClient.new(config.slack_web_hook, options, template).deliver
   end
 
   def self.config
