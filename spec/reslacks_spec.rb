@@ -32,7 +32,30 @@ RSpec.describe Reslacks do
   end
 
   describe '.deliver' do
-    let(:template) do
+    context 'when overriding base options' do
+      let(:options) do
+        {
+          color: %w[danger good warning info].sample,
+          text: Faker::Hipster.paragraph.to_s,
+          username: Faker::Company.name.to_s,
+          footer: "#{Faker::Company.catch_phrase} | #{Time.now.strftime('%A, %d %b %Y %H:%M:%S')}"
+        }
+      end
+
+      before do
+        Reslacks.configure do |config|
+          config.slack_web_hook = ENV['SLACK_WEB_HOOK']
+        end
+      end
+
+      xit 'should deliver the message' do
+        Reslacks.deliver(options, :success)
+      end
+    end
+  end
+
+  context 'testing deep_merge' do
+    let(:options) do
       {
         color: %w[danger good warning info].sample,
         text: Faker::Hipster.paragraph.to_s,
@@ -48,7 +71,31 @@ RSpec.describe Reslacks do
     end
 
     it 'should deliver the message' do
-      Reslacks.deliver(template)
+      Reslacks.deliver(options, :success)
+    end
+  end
+
+  xcontext 'when a template is passed' do
+    before do
+      Reslacks.configure do |config|
+        config.slack_web_hook = ENV['SLACK_WEB_HOOK']
+      end
+    end
+
+    it 'should deliver a message with danger template' do
+      Reslacks.deliver({ channel: '#general', text: 'Fuck' }, :danger)
+    end
+
+    xit 'should deliver a message with success template' do
+      Reslacks.deliver({ channel: '#general', text: 'Fuck' }, :success)
+    end
+
+    xit 'should deliver a message with info template' do
+      Reslacks.deliver({}, :info)
+    end
+
+    xit 'should deliver a message with warning template' do
+      Reslacks.deliver({}, :warning)
     end
   end
 end
