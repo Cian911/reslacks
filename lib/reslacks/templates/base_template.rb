@@ -1,40 +1,42 @@
 module Reslacks
   module Templates
     class BaseTemplate
-      attr_reader :options
+      attr_reader :options, :formatted_message
 
       def initialize(options = {}, template = nil)
+        @formatted_message = {}
         @options = {}
-        attributes = %i[channel color icon_emoji footer mrkdwn sub_field text username]
 
+        attributes = %i[author_name author_link author_icon title title_link fields channel color icon_emoji footer mrkdwn sub_field base_text attachment_text username mrkdwn_in]
+
+        # Apply base options
         attributes.each do |attribute|
           @options[attribute] = send attribute
         end
 
-        @options.merge!(attachments: attachments)
+        # Override if template is provided
+        override_template(template)
 
+        # Override options with user passed options
         @options.deep_merge!(options).each do |key, value|
           send("#{key}=", value) if respond_to?("#{key}=")
         end
-
-        # Override if template is provided
-        override_template(template)
       end
 
-      def attachments
-        [
-          {
-            color: color,
-            fields: [{
-              short: false,
-              value: "<#{sub_field}>"
-            }],
-            footer: footer,
-            footer_icon: footer_icon,
-            mrkdwn_in: ['text'],
-            text: text
-          }
-        ]
+      def author_name
+        'Reslacks'
+      end
+
+      def author_link
+        Reslacks::Utils::ReslacksUtils::RESLACKS_REPO_LINK
+      end
+
+      def author_icon
+        Reslacks::Utils::ReslacksUtils::RESLACKS_ICON_MED
+      end
+
+      def base_text
+        ''
       end
 
       def channel
@@ -49,8 +51,16 @@ module Reslacks
         ':100:'
       end
 
+      def fields
+        [{
+          short: false,
+          value: 'Priority',
+          title: 'Medium'
+        }]
+      end
+
       def footer
-        "#{Reslacks::Utils::ReslacksUtils::RESLACKS_FOOTER_TITLE} | #{Time.now.strftime('%A, %d %b %Y %H:%M:%S')}" 
+        "#{Reslacks::Utils::ReslacksUtils::RESLACKS_FOOTER_TITLE} | #{Time.now.strftime('%A, %d %b %Y %H:%M:%S')}"
       end
 
       def footer_icon
@@ -58,18 +68,31 @@ module Reslacks
       end
 
       def message
-        @options
+        @formatted_message[:attachments] = @options
+        @formatted_message
       end
 
       def mrkdwn
         true
       end
 
+      def mrkdwn_in
+        ['text']
+      end
+
       def sub_field
         app_info
       end
 
-      def text
+      def attachment_text
+        'Reslacks test integration is working. Please override this value with your desired value.'
+      end
+
+      def title
+        'Notification'
+      end
+
+      def title_link
         ''
       end
 
@@ -94,33 +117,3 @@ module Reslacks
     end
   end
 end
-
-=begin
-{
-    "attachments": [
-        {
-            "fallback": "Required plain-text summary of the attachment.",
-            "color": "#36a64f",
-            "pretext": "Optional text that appears above the attachment block",
-            "author_name": "Bobby Tables",
-            "author_link": "http://flickr.com/bobby/",
-            "author_icon": "http://flickr.com/icons/bobby.jpg",
-            "title": "Slack API Documentation",
-            "title_link": "https://api.slack.com/",
-            "text": "Optional text that appears within the attachment",
-            "fields": [
-                {
-                    "title": "Priority",
-                    "value": "High",
-                    "short": false
-                }
-            ],
-            "image_url": "http://my-website.com/path/to/image.jpg",
-            "thumb_url": "http://example.com/path/to/thumb.png",
-            "footer": "Slack API",
-            "footer_icon": "https://platform.slack-edge.com/img/default_application_icon.png",
-            "ts": 123456789
-        }
-    ]
-}
-=end

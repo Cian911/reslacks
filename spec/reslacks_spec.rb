@@ -57,10 +57,12 @@ RSpec.describe Reslacks do
   context 'testing deep_merge' do
     let(:options) do
       {
-        color: %w[danger good warning info].sample,
-        text: Faker::Hipster.paragraph.to_s,
-        username: Faker::Company.name.to_s,
-        footer: "#{Faker::Company.catch_phrase} | #{Time.now.strftime('%A, %d %b %Y %H:%M:%S')}"
+        text: 'Apple is coming for you motherf**ker',
+        username: '',
+        color: '#000000',
+        title: 'WARNING',
+        author_name: 'Apple',
+        icon_emoji: ':apple:'
       }
     end
 
@@ -82,7 +84,7 @@ RSpec.describe Reslacks do
       end
     end
 
-    it 'should deliver a message with danger template' do
+    xit 'should deliver a message with danger template' do
       Reslacks.deliver({ channel: '#general', text: 'Fuck' }, :danger)
     end
 
