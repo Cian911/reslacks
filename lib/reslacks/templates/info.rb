@@ -1,6 +1,6 @@
 module Reslacks
   module Templates
-    class InfoTemplate < BaseTemplate
+    class Info < Base
       def color
         '#A0A0A0'
       end

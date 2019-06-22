@@ -1,6 +1,6 @@
 module Reslacks
   module Templates
-    class BaseTemplate
+    class Base
       attr_reader :options, :formatted_message
 
       def initialize(options = {}, template = nil)

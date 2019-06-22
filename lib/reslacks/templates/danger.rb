@@ -1,12 +1,12 @@
 module Reslacks
   module Templates
-    class WarningTemplate < BaseTemplate
+    class Danger < Base
       def color
-        '#D5C30A'
+        '#990101'
       end
 
       def icon_emoji
-        ':warning:'
+        ':no_entry_sign:'
       end
     end
   end

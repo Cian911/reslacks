@@ -1,3 +1,4 @@
+# Dependendencies
 require 'slack-notifier'
 
 # Configuration
@@ -9,14 +10,14 @@ require 'reslacks/errors'
 require 'reslacks/utils/reslacks_utils'
 
 # Clients
-require 'reslacks/clients/slack_client'
+require 'reslacks/clients/slack'
 
 # Templates
-require 'reslacks/templates/base_template'
-require 'reslacks/templates/danger_template'
-require 'reslacks/templates/success_template'
-require 'reslacks/templates/warning_template'
-require 'reslacks/templates/info_template'
+require 'reslacks/templates/base'
+require 'reslacks/templates/danger'
+require 'reslacks/templates/success'
+require 'reslacks/templates/warning'
+require 'reslacks/templates/info'
 
 # Formatters
 require 'reslacks/formatters/basic'
@@ -29,7 +30,7 @@ module Reslacks
   end
 
   def self.deliver(msg_format = nil, template = nil, options = {})
-    Reslacks::Clients::SlackClient.new(config.slack_web_hook, options, template, msg_format).deliver
+    Reslacks::Clients::Slack.new(config.slack_web_hook, options, template, msg_format).deliver
   end
 
   def self.config

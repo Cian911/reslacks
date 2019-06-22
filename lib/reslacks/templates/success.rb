@@ -1,12 +1,12 @@
 module Reslacks
   module Templates
-    class DangerTemplate < BaseTemplate
+    class Success < Base
       def color
-        '#990101'
+        '#64BF2A'
       end
 
       def icon_emoji
-        ':no_entry_sign:'
+        ':heavy_check_mark:'
       end
     end
   end

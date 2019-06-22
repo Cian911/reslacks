@@ -1,17 +1,18 @@
 module Reslacks
   module Clients
-    class SlackClient
+    class Slack
       attr_accessor :msg_hash
-      attr_reader :notifier, :template
+      attr_reader :notifier, :template, :formatter
 
-      def initialize(token, options = {}, template = nil)
+      def initialize(token, options = {}, template = nil, formatter = nil)
         @notifier = Slack::Notifier.new token
         @msg_hash = options
         @template = template
+        @formatter = formatter
       end
 
       def deliver
-        @msg_hash = Reslacks::Templates::BaseTemplate.new(@msg_hash, @template).message
+        @msg_hash = Reslacks::Templates::Base.new(@msg_hash, @template).message
         @notifier.ping @msg_hash
       end
     end

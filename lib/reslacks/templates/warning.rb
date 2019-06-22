@@ -1,12 +1,12 @@
 module Reslacks
   module Templates
-    class SuccessTemplate < BaseTemplate
+    class Warning < Base
       def color
-        '#64BF2A'
+        '#D5C30A'
       end
 
       def icon_emoji
-        ':heavy_check_mark:'
+        ':warning:'
       end
     end
   end
