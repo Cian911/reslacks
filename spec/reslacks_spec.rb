@@ -54,15 +54,15 @@ RSpec.describe Reslacks do
     end
   end
 
-  context 'testing deep_merge' do
+  xcontext 'testing deep_merge' do
     let(:options) do
       {
         text: 'Apple is coming for you motherf**ker',
-        username: '',
-        color: '#000000',
-        title: 'WARNING',
+        username: 'Joihn Delaney',
+        color: '#7f0dc6',
+        title: 'OH NO',
         author_name: 'Apple',
-        icon_emoji: ':apple:'
+        icon_emoji: ":apple:"
       }
     end
 
@@ -74,6 +74,29 @@ RSpec.describe Reslacks do
 
     it 'should deliver the message' do
       Reslacks.deliver(options, :success)
+    end
+  end
+
+  context 'testing default states' do
+    # let(:options) do
+    #   {
+    #     text: 'Apple is coming for you motherf**ker',
+    #     username: 'Joihn Delaney',
+    #     color: '#7f0dc6',
+    #     title: 'OH NO',
+    #     author_name: 'Apple',
+    #     icon_emoji: ":apple:"
+    #   }
+    # end
+
+    before do
+      Reslacks.configure do |config|
+        config.slack_web_hook = ENV['SLACK_WEB_HOOK']
+      end
+    end
+
+    it 'should deliver the message' do
+      Reslacks.deliver({}, :warning)
     end
   end
 

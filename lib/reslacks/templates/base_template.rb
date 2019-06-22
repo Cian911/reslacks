@@ -7,7 +7,7 @@ module Reslacks
         @formatted_message = {}
         @options = {}
 
-        attributes = %i[author_name author_link author_icon title title_link fields channel color icon_emoji footer mrkdwn sub_field base_text attachment_text username mrkdwn_in]
+        attributes = %i[author_name author_link author_icon title title_link fields channel color icon_emoji footer mrkdwn sub_field text username mrkdwn_in]
 
         # Apply base options
         attributes.each do |attribute|
@@ -33,10 +33,6 @@ module Reslacks
 
       def author_icon
         Reslacks::Utils::ReslacksUtils::RESLACKS_ICON_MED
-      end
-
-      def base_text
-        ''
       end
 
       def channel
@@ -84,7 +80,11 @@ module Reslacks
         app_info
       end
 
-      def attachment_text
+      def pretext
+        'This is some pretext'
+      end
+
+      def text
         'Reslacks test integration is working. Please override this value with your desired value.'
       end
 
