@@ -5,20 +5,30 @@ module Reslacks
 
       def initialize(options = {}, template = nil)
         @formatted_message = {}
+        @base_options = {}
         @options = {}
 
-        attributes = %i[author_name author_link author_icon title title_link fields channel color icon_emoji footer mrkdwn sub_field text username mrkdwn_in]
+        main_attributes = %i[icon_emoji text username channel]
+        attachment_attributes = %i[author_name author_link author_icon title title_link fields color footer mrkdwn sub_field mrkdwn_in]
 
         # Apply base options
-        attributes.each do |attribute|
+        attachment_attributes.each do |attribute|
           @options[attribute] = send attribute
+        end
+
+        main_attributes.each do |attribute|
+          @base_options[attribute] = send attribute
         end
 
         # Override if template is provided
         override_template(template)
 
         # Override options with user passed options
-        @options.deep_merge!(options).each do |key, value|
+        @options.deep_merge!(options).map do |key, value|
+          send("#{key}=", value) if respond_to?("#{key}=")
+        end
+
+        @base_options.merge!(options).map do |key, value|
           send("#{key}=", value) if respond_to?("#{key}=")
         end
       end
@@ -64,6 +74,7 @@ module Reslacks
       end
 
       def message
+        @formatted_message = @base_options
         @formatted_message[:attachments] = @options
         @formatted_message
       end
@@ -111,6 +122,7 @@ module Reslacks
           template = Reslacks::Utils::ReslacksUtils.include_template(template)
           @options.each do |key, _value|
             @options[key] = template.send(key.to_s) if template.respond_to?(key.to_s)
+            @base_options[key] = template.send(key.to_s) if template.respond_to?(key.to_s) && @base_options.key?(key)
           end
         end
       end

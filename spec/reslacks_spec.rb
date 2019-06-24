@@ -78,16 +78,16 @@ RSpec.describe Reslacks do
   end
 
   context 'testing default states' do
-    # let(:options) do
-    #   {
-    #     text: 'Apple is coming for you motherf**ker',
-    #     username: 'Joihn Delaney',
-    #     color: '#7f0dc6',
-    #     title: 'OH NO',
-    #     author_name: 'Apple',
-    #     icon_emoji: ":apple:"
-    #   }
-    # end
+    let(:options) do
+      {
+        text: 'I AM THE BBC!',
+        username: 'John Delaney',
+        color: '#2f7dc6',
+        author_name: 'Slack Integration',
+        icon_emoji: ":zipper_mouth_face:",
+        channel: '#general'
+      }
+    end
 
     before do
       Reslacks.configure do |config|
@@ -96,7 +96,7 @@ RSpec.describe Reslacks do
     end
 
     it 'should deliver the message' do
-      Reslacks.deliver({}, :warning)
+      Reslacks.deliver(:attachments, :success, options)
     end
   end
 

@@ -5,7 +5,7 @@ module Reslacks
       attr_reader :notifier, :template, :formatter
 
       def initialize(token, options = {}, template = nil, formatter = nil)
-        @notifier = Slack::Notifier.new token
+        @notifier = ::Slack::Notifier.new token
         @msg_hash = options
         @template = template
         @formatter = formatter
