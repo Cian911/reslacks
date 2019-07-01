@@ -30,6 +30,10 @@ module Reslacks
   end
 
   def self.deliver(msg_format = nil, template = nil, options = {})
+    raise Reslacks::FormatError, "Invalid message_format type passed to as arg." unless msg_format.is_a?(Symbol)
+    raise Reslacks::FormatError, "Invalid template type passed to as arg." unless template.is_a?(Symbol)
+    raise Reslacks::FormatError, "Invalid options passed as arg. Must be type of Hash." unless options.is_a?(Hash)
+
     Reslacks::Clients::Slack.new(config.slack_web_hook, options, template, msg_format).deliver
   end
 

@@ -36,7 +36,7 @@ RSpec.describe Reslacks::Utils::ReslacksUtils do
       let(:template) { :danger }
 
       it 'returns constantized class' do
-        expect(subject.include_template(template)).to be_an_instance_of(Reslacks::Templates::DangerTemplate)
+        expect(subject.include_template(template)).to be_an_instance_of(Reslacks::Templates::Danger)
       end
     end
   end
