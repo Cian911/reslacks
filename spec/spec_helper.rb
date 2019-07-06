@@ -3,6 +3,7 @@ require 'byebug'
 require 'dotenv'
 require 'factory_bot'
 require 'faker'
+require 'timecop'
 require 'reslacks'
 
 Dotenv.load
