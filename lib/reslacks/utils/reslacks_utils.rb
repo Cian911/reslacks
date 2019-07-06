@@ -2,13 +2,13 @@ module Reslacks
   module Utils
     class ReslacksUtils
       # Image details
-      RESLACKS_ICON_LRG = "https://i.gyazo.com/fb68549ab4db1038cee13104e9eca8cb.png".freeze
-      RESLACKS_ICON_MED = "https://i.gyazo.com/fb68549ab4db1038cee13104e9eca8cb.png".freeze
-      RESLACKS_ICON_SML = "https://i.gyazo.com/fb68549ab4db1038cee13104e9eca8cb.png".freeze
+      RESLACKS_ICON_LRG = 'https://i.gyazo.com/fb68549ab4db1038cee13104e9eca8cb.png'.freeze
+      RESLACKS_ICON_MED = 'https://i.gyazo.com/fb68549ab4db1038cee13104e9eca8cb.png'.freeze
+      RESLACKS_ICON_SML = 'https://i.gyazo.com/fb68549ab4db1038cee13104e9eca8cb.png'.freeze
       # Name details
       RESLACKS_FOOTER_TITLE = "Reslacks ##{Reslacks::VERSION}".freeze
       # Repo Details
-      RESLACKS_REPO_LINK = "https://github.com/Cian911/reslacks".freeze
+      RESLACKS_REPO_LINK = 'https://github.com/Cian911/reslacks'.freeze
 
       def self.template_exists?(class_name)
         class_name = "Reslacks::Templates::#{class_name.to_s.capitalize}"

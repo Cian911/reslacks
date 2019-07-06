@@ -2,11 +2,11 @@ module Reslacks
   module Formatters
     class Basic
       def text
-        "This is some sample text."
+        'This is some sample text.'
       end
 
       def icon_emoji
-        ":100:"
+        ':100:'
       end
 
       def username
