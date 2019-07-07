@@ -20,6 +20,7 @@ require 'reslacks/templates/warning'
 require 'reslacks/templates/info'
 
 # Formatters
+require 'reslacks/format'
 require 'reslacks/formatters/basic'
 require 'reslacks/formatters/attachments'
 require 'reslacks/formatters/buttons'
@@ -31,8 +32,13 @@ module Reslacks
 
   def self.deliver(msg_format = nil, template = nil, options = {})
     validate_params(msg_format, template, options)
+    byebug
+    message = formatter(msg_format, template, options)
+    Reslacks::Clients::Slack.new(config.slack_web_hook, message).deliver
+  end
 
-    Reslacks::Clients::Slack.new(config.slack_web_hook, options, template, msg_format).deliver
+  def self.formatter(msg_format, template, options)
+    Reslacks::Format.new(msg_format, template, options).formatted_message
   end
 
   def self.config

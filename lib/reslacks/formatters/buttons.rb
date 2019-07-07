@@ -55,5 +55,9 @@ module Reslacks
         ]
       end
     end
+
+    def message
+      # @formatted_message[:attachments] = @options
+    end
   end
 end

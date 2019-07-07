@@ -31,9 +31,9 @@ module Reslacks
         return false
       end
 
-      def self.include_formatter(formatter)
+      def self.include_formatter(formatter, options)
         formatter = "Reslacks::Formatters::#{formatter.to_s.capitalize}".constantize
-        formatter.new
+        formatter.new options
       end
     end
   end

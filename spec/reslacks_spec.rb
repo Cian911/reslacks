@@ -53,12 +53,12 @@ RSpec.describe Reslacks do
     end
 
     context 'when overriding base options' do
-      let(:subject) { described_class.deliver(:base, :info, options) }
+      let(:subject) { described_class.deliver(:basic, :info, options) }
 
       it 'passes args to slack client successfully' do
         subject
         expect(Reslacks::Clients::Slack).to have_received(:new)
-          .with(web_token, options, :info, :base)
+          .with(web_token, options, :info, :basic)
       end
     end
 
@@ -72,7 +72,7 @@ RSpec.describe Reslacks do
     end
 
     context 'when template arg is invalid' do
-      let(:subject) { described_class.deliver(:base, 0, {}) }
+      let(:subject) { described_class.deliver(:basic, 0, {}) }
 
       it 'raises exception when template is invalid' do
         expect { subject }.to raise_error(Reslacks::FormatError)
@@ -81,7 +81,7 @@ RSpec.describe Reslacks do
     end
 
     context 'when options args are invalid' do
-      let(:subject) { described_class.deliver(:base, :info, '') }
+      let(:subject) { described_class.deliver(:basic, :info, '') }
 
       it 'raises exception when options is invalid' do
         expect { subject }.to raise_error(Reslacks::FormatError)

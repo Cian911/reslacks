@@ -10,7 +10,7 @@ module Reslacks
 
         main_attributes = %i[icon_emoji text username channel]
         attachment_attributes = %i[author_name author_link author_icon title title_link fields color footer mrkdwn sub_field mrkdwn_in]
-        byebug
+
         # Apply base options
         attachment_attributes.each do |attribute|
           @options[attribute] = send attribute
