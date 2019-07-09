@@ -36,11 +36,14 @@ RSpec.describe Reslacks do
     let(:web_token) { ENV['SLACK_WEB_HOOK'] }
     let(:options) do
       {
-        color: %w[danger good warning info].sample,
-        text: Faker::Hipster.paragraph.to_s,
-        username: Faker::Company.name.to_s,
-        footer: "#{Faker::Company.catch_phrase} | #{Time.now.strftime('%A, %d %b %Y %H:%M:%S')}"
+        color: 'good',
+        text: 'Seitan bushwick retro. Fashion axe sartorial ennui bitters dreamcatcher',
+        username: 'Conn Inc',
+        footer: "Dont be Evil! | #{Time.now.strftime('%A, %d %b %Y %H:%M:%S')}"
       }
+    end
+    let(:formatted_msg) do
+      { color: 'good', text: 'Seitan bushwick retro. Fashion axe sartorial ennui bitters dreamcatcher', username: 'Conn Inc', footer: "Dont be Evil! | #{Time.now.strftime('%A, %d %b %Y %H:%M:%S')}" }
     end
 
     before do
@@ -58,7 +61,7 @@ RSpec.describe Reslacks do
       it 'passes args to slack client successfully' do
         subject
         expect(Reslacks::Clients::Slack).to have_received(:new)
-          .with(web_token, options, :info, :basic)
+          .with(web_token, formatted_msg)
       end
     end
 

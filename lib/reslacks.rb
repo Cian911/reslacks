@@ -32,13 +32,8 @@ module Reslacks
 
   def self.deliver(msg_format = nil, template = nil, options = {})
     validate_params(msg_format, template, options)
-    byebug
     message = formatter(msg_format, template, options)
     Reslacks::Clients::Slack.new(config.slack_web_hook, message).deliver
-  end
-
-  def self.formatter(msg_format, template, options)
-    Reslacks::Format.new(msg_format, template, options).formatted_message
   end
 
   def self.config
@@ -54,6 +49,10 @@ module Reslacks
   end
 
   private
+
+  def self.formatter(msg_format, template, options)
+    Reslacks::Format.new(msg_format, template, options).formatted_message
+  end
 
   def self.validate_params(msg_format, template, options)
     raise Reslacks::FormatError, 'Invalid message_format type passed to as arg.' unless msg_format.is_a?(Symbol) || msg_format.nil?

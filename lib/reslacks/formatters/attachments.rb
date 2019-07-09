@@ -6,6 +6,7 @@ module Reslacks
       def initialize(options = {})
         @options = {}
         @formatted_message = {}
+        @additional_options = {}
         attributes = %i[author_name author_link author_icon title title_link fields color footer mrkdwn sub_field mrkdwn_in]
 
         # Create base options
@@ -16,6 +17,12 @@ module Reslacks
         # Override options with user passed options
         @options.deep_merge!(options).map do |key, value|
           send("#{key}=", value) if respond_to?("#{key}=")
+        end
+
+        # Check for options outside of attachment methods
+        @formatted_message[:attachments] = @options
+        @options.each do |key, value|
+          @formatted_message[key] = value unless respond_to?(key.to_s)
         end
       end
 
@@ -63,6 +70,10 @@ module Reslacks
         ['text']
       end
 
+      def mrkdwn
+        true
+      end
+
       def sub_field
         app_info
       end
@@ -72,7 +83,7 @@ module Reslacks
       end
 
       def message
-        @formatted_message[:attachments] = @options
+        @formatted_message
       end
 
       private
