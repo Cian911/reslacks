@@ -15,6 +15,7 @@ RSpec.describe Reslacks::Format do
       let(:expected_msg) do
         {
           channel: '#general',
+          color: '#ffffff',
           icon_emoji: ':100:',
           text: 'This is some sample text.',
           username: 'Reslacks #0.1.0'
@@ -32,6 +33,7 @@ RSpec.describe Reslacks::Format do
         let(:expected_msg) do
           {
             channel: '#general',
+            color: '#ffffff',
             icon_emoji: ':100:',
             text: 'This is some sample text.',
             username: 'Reslacks #0.1.0'
@@ -95,10 +97,10 @@ RSpec.describe Reslacks::Format do
         let(:expected_msg) do
           {
             color: '#ffffff',
-            channel: '#general',
+            channel: '',
             icon_emoji: ':not_heavy_check_mark:',
-            text: 'This is some sample text.',
-            username: 'Reslacks #0.1.0'
+            text: 'Reslacks test integration is working. Please override this value with your desired value.',
+            username: '[Reslacks](https://github.com/Cian911/reslacks) - 0.1.0'
           }
         end
 

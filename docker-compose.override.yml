@@ -9,7 +9,8 @@ services:
     volumes:
       - ${SSH_AUTH_SOCK}:/ssh-agent
       - .:/usr/src/app
-      - bundle-data:/usr/src/bundle
+      - bundle-data:/usr/src/bundle:delegated
+      - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   bundle-data:

@@ -3,7 +3,7 @@ module Reslacks
     class Basic
       def initialize(options = {})
         @options = {}
-        attributes = %i[icon_emoji text username channel]
+        attributes = %i[icon_emoji text username channel color]
 
         # Create base options
         attributes.each do |attribute|
@@ -14,6 +14,10 @@ module Reslacks
         @options.deep_merge!(options).map do |key, value|
           send("#{key}=", value) if respond_to?("#{key}=")
         end
+      end
+
+      def color
+        '#ffffff'
       end
 
       def channel

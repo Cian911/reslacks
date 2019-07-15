@@ -13,7 +13,6 @@ module Reslacks
       @options = @format.message if @format.is_a? Object
 
       if define_template(template)
-        byebug
         @options.each do |key, value|
           # If key is not set, use template
           @options[key] = @template.send(key.to_s) if @template.respond_to?(key.to_s)
