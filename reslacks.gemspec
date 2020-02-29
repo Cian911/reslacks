@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'dotenv', '~> 2.7.2'
   spec.add_development_dependency 'faker', '~> 1.9.3'
   spec.add_development_dependency 'factory_bot', '~> 5.0.2'
-  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rubocop', '~> 0.49.0'
 
